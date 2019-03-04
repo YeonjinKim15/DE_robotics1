@@ -1,0 +1,84 @@
+
+t = 60  #thickness
+w = 90  #width
+h = 200  #height
+
+# coordinates are (x,y,z)
+# middle block is (0,0,170)
+# bottom of table is (0,0,0)
+
+# one list of all positions in order
+array_of_positions = []
+list = []
+
+
+# number of bricks in each layer
+layers = [5, 4, 4, 3, 3, 2, 2, 1]
+
+# coefficients for alternating brick picking from middle
+coefficient_odd = [0, -1, 1, -2, 2]
+coefficient_even = [0.5, -0.5, 1.5, -1.5]
+
+#count layers (upright/flat)
+count_layer = 0
+
+# count bricks
+brick_number = 0
+
+
+
+def get_coordinates(i,x):
+    #i is count_layer
+    y=0
+    z=0
+    for i in range(len(layers)):
+        
+    # Number of bricks in a layer
+      bricks_in_layer = layers[i]
+    
+
+    
+      # brick_number, iterate through bricks in layer
+      for x in range(bricks_in_layer):
+        
+    
+        #if layer is ODD NUMBER OF BRICKS and VERTICAL then... (layer 0, 4)
+        if x%2 == 1 and i%2 == 1:
+    
+          y = coefficient_odd[brick_number]*(h+20)
+        
+          z= int(((count_layer+1)/2))*(h+t) + h - 30
+    
+    
+        # if layer is ODD NUMBER OF BRICKS and HORIZONTAL then... (layer 3, 7)
+        elif x%2 == 1 and i%2 == 0:
+    
+          y= coefficient_odd[brick_number]*(h+20)
+        
+          z= int(((count_layer+1)/2))*(h+t) - 30
+      
+      
+        # if layer is EVEN NUMBER OF BRICKS and VERTICAL then... (layer 2, 6)
+        elif x%2 == 1 and i%2 == 1:
+      
+          y= coefficient_even[brick_number]*(h+20)
+        
+          z= int(((count_layer+1)/2))*(h+t) + h - 30
+      
+        # if layer is EVEN NUMBER OF BRICKS and HORIZONTAL then... (layer 1, 5)
+        elif x%2 == 1 and i%2 == 0:
+      
+          y= coefficient_even[brick_number]*(h+20)
+        
+          z= int(((count_layer+1)/2))*(h+t) - 30
+        
+        array_of_positions.append([0.7,y,z])
+        
+      x += 1
+    # move on to next layer
+    i += 1
+        
+
+        
+    print array_of_positions
+        
